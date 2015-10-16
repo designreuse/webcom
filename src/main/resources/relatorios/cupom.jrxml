@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="cupom" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="67d87621-984f-449a-b5e8-118d82a110f1">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="id_venda" class="java.lang.Long">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+     venda_cabecalho.`data_hora_venda` AS venda_cabecalho_data_hora_venda,
+     venda_cabecalho.`valor_total` AS venda_cabecalho_valor_total,
+     itens_venda.`nome_produto` AS itens_venda_nome_produto,
+     itens_venda.`qtde` AS itens_venda_qtde,
+     itens_venda.`sequencia` AS itens_venda_sequencia,
+     itens_venda.`sub_total` AS itens_venda_sub_total,
+     itens_venda.`valor_unitario` AS itens_venda_valor_unitario
+FROM
+     `venda_cabecalho` venda_cabecalho INNER JOIN `itens_venda` itens_venda ON venda_cabecalho.`id_venda_cabecalho` = itens_venda.`id_venda_cabecalho` where venda_cabecalho.id_venda_cabecalho = $P{id_venda} and itens_venda.status_item= "vendido"
+
+
+]]>
+	</queryString>
+	<field name="venda_cabecalho_data_hora_venda" class="java.sql.Timestamp"/>
+	<field name="venda_cabecalho_valor_total" class="java.math.BigDecimal"/>
+	<field name="itens_venda_nome_produto" class="java.lang.String"/>
+	<field name="itens_venda_qtde" class="java.lang.Integer"/>
+	<field name="itens_venda_sequencia" class="java.lang.Integer"/>
+	<field name="itens_venda_sub_total" class="java.math.BigDecimal"/>
+	<field name="itens_venda_valor_unitario" class="java.math.BigDecimal"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="58" splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch">
+			<textField>
+				<reportElement uuid="b4ceaf27-947c-4c09-a266-237b3fcc6043" x="0" y="15" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{venda_cabecalho_data_hora_venda}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="20" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="095ed957-11f3-446d-9d7f-4cab6717b025" x="0" y="0" width="100" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[itens]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="7e1abd7c-60f0-4044-b87f-cb0ece734d10" x="100" y="0" width="155" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[descrição]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="8eb535a6-cdbf-4a99-b3a8-a56440ade106" x="355" y="0" width="100" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[valor unitario]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="ea8b5738-caa2-47b5-b46d-d530f0020bf1" x="455" y="0" width="100" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[subtotal]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="08ad4a67-2974-414f-b0ed-75cc47696407" x="255" y="0" width="100" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[quantidade]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="20" splitType="Stretch">
+			<textField>
+				<reportElement uuid="5d12b5bf-5830-45e8-89f8-ae68468581db" x="0" y="0" width="100" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{itens_venda_sequencia}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="b3917be7-fccb-400b-a5b7-e1de17e28f6f" x="100" y="0" width="155" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{itens_venda_nome_produto}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="9c30d308-9809-4427-b0e2-72ce8dd1dd83" x="255" y="0" width="100" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{itens_venda_qtde}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="8881ae1f-14b0-447a-bf9c-b1f1a36e5e52" x="355" y="0" width="100" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{itens_venda_valor_unitario}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="0f17b6ca-3b6e-4ca3-b110-b6d7b34b208a" x="455" y="0" width="100" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{itens_venda_sub_total}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="58" splitType="Stretch">
+			<textField>
+				<reportElement uuid="9b159215-5eb2-433b-8dd2-1c7f09090813" x="455" y="38" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{venda_cabecalho_valor_total}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+</jasperReport>
